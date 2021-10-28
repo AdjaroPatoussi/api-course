@@ -1,0 +1,14 @@
+php bin/console doctrine:fixtures:load
+php bin/console doctrine:migrations:migrate
+php bin/console make:migration
+php bin/console make:entity Client
+php bin/console make:user
+composer require orm-fixtures fzaninotto/faker --dev
+php bin/console  dbal:run-sql
+php bin/console doctrine:database:create
+composer require server --dev
+symfony server:start
+git init
+git status
+git add .
+git commit -m "j'ecris ce que je veucx ici"
