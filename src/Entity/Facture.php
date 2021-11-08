@@ -2,11 +2,25 @@
 
 namespace App\Entity;
 
-use App\Repository\FactureRepository;
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\FactureRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+
 
 /**
  * @ORM\Entity(repositoryClass=FactureRepository::class)
+ * @ApiResource(
+ * attributes={
+ * "order": {"montant": "desc"}
+ * },
+ * normalizationContext={"groups"={"facture-read"}}
+ * )
+ * @ApiFilter(OrderFilter::class , properties={"sentAt"})
+ * 
  */
 class Facture
 {
@@ -19,30 +33,37 @@ class Facture
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"facture-read"})
      */
     private $montant;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"facture-read"})
      */
     private $sentAt;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"facture-read"})
      */
     private $satut;
 
     /**
      * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="factures")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"facture-read"})
      */
     private $customer;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"facture-read"})
      */
     private $chrono;
 
+
+  
     public function getId(): ?int
     {
         return $this->id;

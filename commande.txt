@@ -1,14 +1,19 @@
-php bin/console doctrine:fixtures:load
-php bin/console doctrine:migrations:migrate
-php bin/console make:migration
-php bin/console make:entity Client
-php bin/console make:user
-composer require orm-fixtures fzaninotto/faker --dev
+php bin/console doctrine:fixtures:load --METTRE 0 JOUR LES fixtures
+php bin/console doctrine:migrations:migrate --APPLIQUER LES migration
+php bin/console make:migration --FAIRE DES migration
+php bin/console make:entity Client --CREER UNE ENTIT2
+php bin/console make:user --CREEr l'entiter des utilisateur
+composer require orm-fixtures fzaninotto/faker --dev --creer les fixtures
 php bin/console  dbal:run-sql
-php bin/console doctrine:database:create
-composer require server --dev
-symfony server:start
-git init
+php bin/console doctrine:database:create --creer la base de donner apres configuration du ficher .env
+composer require server --dev 
+symfony server:start --demarer le serveur
+git init --initialiser le depot git
 git status
 git add .
 git commit -m "j'ecris ce que je veucx ici"
+composer require api --INSTALATION DE API  PLATEFORM
+api PLATEFORM{
+     ajout de  --@ApiResource-- dans les entity pour les afficher dans api PLATEFORM
+}
+composer dump-autoload
